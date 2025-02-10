@@ -28,8 +28,6 @@ fun main(args: Array<String>) {
 
 @Configuration
 class S3USConfig(
-    @Value("\${S3_ENDPOINT:\"https://s3.us-east-1.amazonaws.com}\"")
-    private val endpoint: String
 ) {
     companion object {
         private val logger = LoggerFactory.getLogger(S3USConfig::class.java)
@@ -43,21 +41,13 @@ class S3USConfig(
     }
 
     fun s3ClientUs(): S3Client {
-        logger.info("S3 Endpoint $endpoint")
-
         return S3Client.builder()
-//            .endpointOverride(URI.create("https://s3express-use1-az4.us-east-1.amazonaws.com"))
-//            .endpointOverride(URI.create(endpoint.trim()))
             .region(Region.US_EAST_1)
             .build()
     }
 
     fun s3ClientSa(): S3Client {
-        logger.info("S3 Endpoint $endpoint")
-
         return S3Client.builder()
-//            .endpointOverride(URI.create("https://s3express-use1-az4.us-east-1.amazonaws.com"))
-//            .endpointOverride(URI.create(endpoint.trim()))
             .region(Region.SA_EAST_1)
             .build()
     }
